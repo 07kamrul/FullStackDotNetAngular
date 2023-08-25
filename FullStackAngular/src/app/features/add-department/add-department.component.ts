@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AddDepartmentRequest } from 'src/app/models/add-department-request-model';
+import { AddDepartmentRequest } from 'src/app/models/department-model';
 import { DepartmentService } from 'src/app/services/department-service/department.service';
 
 @Component({
@@ -11,13 +11,14 @@ export class AddDepartmentComponent {
 
   departmentModel: AddDepartmentRequest;
 
-  constructor(private departmentService: DepartmentService){
+  constructor(private departmentService : DepartmentService){
     this.departmentModel = {
       id: 0,
-      department_name: ''
+      departmentName: ''
     };
   }
-  onFormSubmit(){
+
+  departmentSubmit(){
     this.departmentService.addDepartment(this.departmentModel)
     .subscribe({
       next:(response)=>{

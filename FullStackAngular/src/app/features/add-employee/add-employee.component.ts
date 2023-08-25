@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { AddEmployeeRequest } from 'src/app/models/add-employee-request-model';
+import { CompanyResponse } from 'src/app/models/company-model';
+import { DepartmentResponse } from 'src/app/models/department-model';
+import { AddEmployeeRequest } from 'src/app/models/employee-model';
+import { CompanyService } from 'src/app/services/company-service/company.service';
+import { DepartmentService } from 'src/app/services/department-service/department.service';
+import { EmployeeService } from 'src/app/services/employee-service/employee.service';
 
 @Component({
   selector: 'app-add-employee',
@@ -9,17 +14,65 @@ import { AddEmployeeRequest } from 'src/app/models/add-employee-request-model';
 export class AddEmployeeComponent {
 
   employeemodel: AddEmployeeRequest;
+  departmentModel: DepartmentResponse;
+  companyModel: CompanyResponse;
 
-  constructor(){
+  departments! : DepartmentResponse[];
+  companies! : CompanyResponse[];
+
+  ngOnInit(){
+    this.getDepartmentList();
+    this.getCompanyList();
+  }
+
+  constructor(private employeeService: EmployeeService,
+    private departmentService: DepartmentService,
+    private companyService: CompanyService)
+    {
     this.employeemodel = {
+      empCode: 0,
       name: '',
-      phoneno: '',
+      phoneNo: '',
       address: '',
-      departmentname: '',
-      companyname: ''
+      departmentName: '',
+      companyName: '',
+      isApproved: 0
+    };
+
+    this.departmentModel = {
+      id: 0,
+      departmentName:''
+    };
+
+    this.companyModel = {
+      id: 0,
+      companyName:''
     };
   }
-  onFormSubmit(){
-    
+
+  getDepartmentList(){
+    this.departmentService.getDepartments().subscribe(
+      (response : any) => {
+        this.departments = response;
+      }
+    )
   }
+
+  getCompanyList(){
+    this.companyService.getCompanies().subscribe(
+      (response: any) => {
+        this.companies = response;
+      }
+    )
+  }
+
+  employeeSubmit(){
+    this.employeeService.addEmployee(this.employeemodel)
+    .subscribe({
+      next:(response)=>{
+        console.log('This was successfull!')
+      }
+    })
+  }
+  
 }
