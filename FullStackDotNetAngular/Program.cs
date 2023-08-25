@@ -10,11 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("DBConnection")
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddCors();
-builder.Services.AddControllers().AddJsonOptions(x =>
-{
-    x.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-});
+builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -34,6 +30,13 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseCors(options =>
+{
+    options.AllowAnyHeader();
+    options.AllowAnyOrigin();
+    options.AllowAnyMethod();
+});
 
 app.UseAuthorization();
 
