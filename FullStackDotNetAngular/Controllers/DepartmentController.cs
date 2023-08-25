@@ -40,7 +40,7 @@ namespace FullStackDotNetAngular.Controllers
             {
                 if (departmentRequest.DepartmentName == null)
                 {
-                    throw new BadHttpRequestException("This employee name is incorrect");
+                    throw new BadHttpRequestException("This department name is incorrect");
                 }
 
                 var department = _departmentService.SaveDepartment(departmentRequest);
