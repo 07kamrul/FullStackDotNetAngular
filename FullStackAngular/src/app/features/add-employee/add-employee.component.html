@@ -26,8 +26,8 @@
         <div class="form-group row">
             <label for="department" class="col-sm-2 col-form-label">Department Name</label>
             <div class="col-sm-5">
-              <select [(ngModel)]="departmentModel">
-                <option *ngFor="let dept of departments" value="dept.departmentName">{{dept.departmentName}}</option>
+              <select (change)="changeDepartmentName($event)">
+                <option *ngFor="let dept of departments" [ngValue]="dept.departmentName">{{dept.departmentName}}</option>
               </select>
             </div>
         </div>
@@ -35,8 +35,8 @@
         <div class="form-group row">
             <label for="company" class="col-sm-2 col-form-label">Company Name</label>
             <div class="col-sm-5">
-              <select [(ngModel)]="companyModel">
-                <option *ngFor="let company of companies" value="dept.departmentName">{{company.companyName}}</option>
+              <select (change)="changeCompanyName($event)">
+                <option *ngFor="let company of companies" [ngValue]="company.companyName">{{company.companyName}}</option>
               </select>
             </div>
         </div>

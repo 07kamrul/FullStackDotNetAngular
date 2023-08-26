@@ -36,7 +36,7 @@ namespace FullStackDotNetAngular.Controllers
         {
             try
             {
-                if (employeeRequest.Name == null)
+                if (employeeRequest.Name.Length == 0)
                 {
                     throw new BadHttpRequestException("This employee name is incorrect");
                 }

@@ -38,7 +38,7 @@ namespace FullStackDotNetAngular.Controllers
         {
             try
             {
-                if (departmentRequest.DepartmentName == null)
+                if (departmentRequest.DepartmentName.Length == 0)
                 {
                     throw new BadHttpRequestException("This department name is incorrect");
                 }

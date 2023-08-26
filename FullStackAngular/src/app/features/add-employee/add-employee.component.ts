@@ -48,6 +48,15 @@ export class AddEmployeeComponent {
       id: 0,
       companyName:''
     };
+
+  }
+  
+  changeDepartmentName(value : any){
+    this.employeemodel.departmentName = value.target.value;
+  }
+
+  changeCompanyName(value : any){
+    this.employeemodel.companyName = value.target.value;
   }
 
   getDepartmentList(){
