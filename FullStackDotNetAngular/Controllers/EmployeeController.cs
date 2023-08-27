@@ -2,6 +2,7 @@
 using FullStackDotNetAngular.RequestModels;
 using FullStackDotNetAngular.ResponseModel;
 using FullStackDotNetAngular.Services;
+using System.Net;
 
 namespace FullStackDotNetAngular.Controllers
 {
@@ -30,6 +31,20 @@ namespace FullStackDotNetAngular.Controllers
             }
         }
 
+        [HttpGet("GetEmployee/{empCode}")]
+        public EmployeeResponseModel GetEmployee(int empCode)
+        {
+            try
+            {
+                var employee = _employeeService.GetEmployee(empCode);
+                return employee;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
 
         [HttpPost("SaveEmployee")]
         public EmployeeResponseModel SaveEmployee([FromBody] EmployeeRequestModel employeeRequest)
@@ -49,5 +64,46 @@ namespace FullStackDotNetAngular.Controllers
                 throw;
             }
         }
+
+
+        [HttpPut("ApproveEmployee")]
+        public ActionResult UpdateAccount([FromBody] EmployeeRequestModel employeeRequest)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new BadHttpRequestException("Invalid request.");
+                }
+
+                _employeeService.UpdateEmployee(employeeRequest);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpDelete("RejectEmployee/{id}")]
+        public IActionResult RejectEmployee(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _employeeService.RejectEmployee(id);
+                return Ok("This employee is rejected.");
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message, null, (int)HttpStatusCode.InternalServerError);
+            }
+        }
+
     }
 }

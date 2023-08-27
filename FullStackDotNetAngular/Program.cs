@@ -1,13 +1,16 @@
 using FullStackDotNetAngular;
 using FullStackDotNetAngular.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DBConnection");
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<DataContext>(
+    options => options.UseSqlServer(connectionString)
+);
 
 builder.Services.AddCors();
 builder.Services.AddControllers();

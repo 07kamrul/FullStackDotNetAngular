@@ -17,17 +17,37 @@ namespace FullStackDotNetAngular.Services
             _mapper = mapper;
         }
 
+        public EmployeeResponseModel GetEmployee(int empCode)
+        {
+            var employee = _employeeRepository.GetEmployee(empCode);
+            return _mapper.Map<EmployeeResponseModel>(employee);
+        }
+
         public List<EmployeeResponseModel> GetEmployees()
         {
             var employees = _employeeRepository.GetEmployees();
             return _mapper.Map<List<EmployeeResponseModel>>(employees);
         }
-
+        
         public EmployeeResponseModel SaveEmployee(EmployeeRequestModel employeeRequest)
         {
             var emp = _mapper.Map<Employee>(employeeRequest);
             var employee = _employeeRepository.SaveEmployee(emp);
             return _mapper.Map<EmployeeResponseModel>(employee);
         }
+
+        public EmployeeResponseModel UpdateEmployee(EmployeeRequestModel employeeRequest)
+        {
+            var emp = _mapper.Map<Employee>(employeeRequest);
+            var employee = _employeeRepository.UpdateEmployee(emp);
+            return _mapper.Map<EmployeeResponseModel>(employee);
+        }
+
+        public void RejectEmployee(int id)
+        {
+            var getEmployee = _mapper.Map<Employee>(GetEmployee(id));
+            _employeeRepository.RejectEmployee(getEmployee);
+        }
+
     }
 }
