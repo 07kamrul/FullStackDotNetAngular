@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FullStackDotNetAngular/bin/Debug/net6.0/FullStackDotNetAngular.dll
+/FullStackDotNetAngular/bin/Debug/net6.0/FullStackDotNetAngular.pdb
+/FullStackDotNetAngular/obj/Debug/net6.0/ref/FullStackDotNetAngular.dll
+/FullStackDotNetAngular/obj/Debug/net6.0/refint/FullStackDotNetAngular.dll
+/FullStackDotNetAngular/obj/Debug/net6.0/FullStackDotNetAngular.dll
+/FullStackDotNetAngular/obj/Debug/net6.0/FullStackDotNetAngular.pdb
+*.vsidx
+/.vs/ProjectEvaluation/fullstackdotnetangular.projects.v7.bin
+/.vs/ProjectEvaluation/fullstackdotnetangular.metadata.v7.bin
+/.vs/FullStackDotNetAngular/v17/.futdcache.v2
+/.vs/FullStackDotNetAngular/v17/.suo

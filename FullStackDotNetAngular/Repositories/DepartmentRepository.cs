@@ -1,4 +1,5 @@
 ﻿using FullStackDotNetAngular.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FullStackDotNetAngular.Repositories
 {
@@ -12,12 +13,12 @@ namespace FullStackDotNetAngular.Repositories
 
         public List<Department> GetDepartments()
         {
-            return _context.Department.ToList();
+            return _context.Departments.AsNoTracking().ToList();
         }
 
         public Department SaveDepartment(Department dept)
         {
-            _context.Department.Add(dept);
+            _context.Departments.Add(dept);
             _context.SaveChanges();
             return dept;
         }

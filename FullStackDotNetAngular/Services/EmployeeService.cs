@@ -45,8 +45,17 @@ namespace FullStackDotNetAngular.Services
 
         public void RejectEmployee(int id)
         {
-            var getEmployee = _mapper.Map<Employee>(GetEmployee(id));
-            _employeeRepository.RejectEmployee(getEmployee);
+            var getEmployee = GetEmployee(id);
+            if(getEmployee.EmpCode != 0) 
+            {
+                var employee = _mapper.Map<Employee>(getEmployee);
+                _employeeRepository.RejectEmployee(employee);
+            }
+            else
+            {
+                throw new Exception("Employee not found.");
+            }
+            
         }
 
     }

@@ -16,10 +16,10 @@ namespace FullStackDotNetAngular.Repositories
 
         public Employee GetEmployee(int empCode)
         {
-            var employee = _context.Employee.Find(empCode);
+            var employee = _context.Employees.AsNoTracking().Where(e => e.EmpCode == empCode).FirstOrDefault();
             if(employee == null)
             {
-                throw new KeyNotFoundException("Employee not found.");
+                return new Employee();
             }
             else
             {
@@ -29,12 +29,12 @@ namespace FullStackDotNetAngular.Repositories
 
         public List<Employee> GetEmployees()
         {            
-            return _context.Employee.ToList();
+            return _context.Employees.AsNoTracking().ToList();
         }
 
         public Employee SaveEmployee(Employee employee)
         {
-            _context.Employee.Add(employee);
+            _context.Employees.Add(employee);
             _context.SaveChanges();
             return employee;
         }
@@ -50,11 +50,8 @@ namespace FullStackDotNetAngular.Repositories
 
         public void RejectEmployee(Employee employee)
         {
-            /*_context.Entry(employee).State = EntityState.Detached;
-            _context.Set<Employee>().Remove(employee);
-            _context.SaveChanges();*/
 
-            _context.Employee.Remove(employee);
+            _context.Employees.Remove(employee);
             _context.SaveChangesAsync();
 
 

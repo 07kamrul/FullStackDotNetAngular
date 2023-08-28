@@ -1,4 +1,5 @@
 ﻿using FullStackDotNetAngular.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FullStackDotNetAngular.Repositories
 {
@@ -12,12 +13,12 @@ namespace FullStackDotNetAngular.Repositories
 
         public List<Company> GetCompanies()
         {
-            return _context.Company.ToList();
+            return _context.Companys.AsNoTracking().ToList();
         }
 
         public Company SaveCompany(Company company)
         {
-            _context.Company.Add(company);
+            _context.Companys.Add(company);
             _context.SaveChanges();
             return company;
         }
