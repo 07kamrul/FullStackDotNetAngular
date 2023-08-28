@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AddCompanyRequest } from 'src/app/models/company-model';
 import { CompanyService } from 'src/app/services/company-service/company.service';
 
@@ -11,7 +12,10 @@ export class AddCompanyComponent {
 
   companyModel: AddCompanyRequest;
 
-  constructor(private companyService : CompanyService){
+  constructor(
+    private companyService : CompanyService,
+    private router: Router )
+    {
     this.companyModel = {
       id: 0,
       companyName: ''
@@ -22,7 +26,8 @@ export class AddCompanyComponent {
     this.companyService.addCompany(this.companyModel)
     .subscribe({
       next:(response)=>{
-        console.log('This was successfull!')
+        console.log('This was successfull!');
+        this.router.navigate(['/', 'company']);
       }
     })
   }

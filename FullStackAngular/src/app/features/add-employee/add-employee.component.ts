@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CompanyResponse } from 'src/app/models/company-model';
 import { DepartmentResponse } from 'src/app/models/department-model';
 import { AddEmployeeRequest } from 'src/app/models/employee-model';
@@ -25,9 +26,12 @@ export class AddEmployeeComponent {
     this.getCompanyList();
   }
 
-  constructor(private employeeService: EmployeeService,
+  constructor(
+    private employeeService: EmployeeService,
     private departmentService: DepartmentService,
-    private companyService: CompanyService)
+    private companyService: CompanyService,
+    private router : Router
+    )
     {
     this.employeemodel = {
       empCode: 0,
@@ -79,7 +83,8 @@ export class AddEmployeeComponent {
     this.employeeService.addEmployee(this.employeemodel)
     .subscribe({
       next:(response)=>{
-        console.log('This was successfull!')
+        console.log('This was successfull!');
+        this.router.navigate(['/', 'employee']);
       }
     })
   }
