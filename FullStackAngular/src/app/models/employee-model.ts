@@ -1,4 +1,4 @@
-export interface AddEmployeeRequest{
+export interface EmployeeRequest{
     empCode: number;
     name: string;
     phoneNo: string;

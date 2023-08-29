@@ -14,6 +14,7 @@ import { AddDepartmentComponent } from './features/add-department/add-department
 import { AddCompanyComponent } from './features/add-company/add-company.component';
 import { HttpClientModule } from '@angular/common/http';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { EmployeeModalComponent } from './features/employee-modal/employee-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     EmployeeComponent,
     AddEmployeeComponent,
     AddDepartmentComponent,
-    AddCompanyComponent
+    AddCompanyComponent,
+    EmployeeModalComponent
   ],
   imports: [
     BrowserModule,

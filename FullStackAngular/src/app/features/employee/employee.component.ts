@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { EmployeeResponse } from 'src/app/models/employee-model';
+import { EmployeeRequest, EmployeeResponse } from 'src/app/models/employee-model';
 import { EmployeeService } from 'src/app/services/employee-service/employee.service';
+import { EmployeeModalComponent } from '../employee-modal/employee-modal.component';
 
 @Component({
   selector: 'app-employee',
@@ -36,18 +37,28 @@ export class EmployeeComponent {
     )
   }
 
+  getEmployee(empCode: any){
+    this.employeeService.getEmployee(empCode).subscribe(
+      (response : any) => {
+        this.employeeModal = response;
+      }
+    )
+  }
+
   employeeDetails(_employeeCode: any){
     this.employeeCode = _employeeCode;
-    //this.employeeModal.empCode = this.formValue.value.empCode;
-  }
-
-  open(content : any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      console.log(result);
-      console.log(content);
-    }, (reason) => {
-
-    });
   }
   
+
+  open(emp: EmployeeResponse) {
+    const modalRef = this.modalService.open(EmployeeModalComponent);
+    // console.log(emp);
+    modalRef.componentInstance.employee = emp;
+
+    modalRef.result.then((employee: EmployeeRequest) => {
+      if (employee) {
+       // console.log(employee);
+      }
+    });
+  }
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyResponse } from 'src/app/models/company-model';
 import { DepartmentResponse } from 'src/app/models/department-model';
-import { AddEmployeeRequest } from 'src/app/models/employee-model';
+import { EmployeeRequest } from 'src/app/models/employee-model';
 import { CompanyService } from 'src/app/services/company-service/company.service';
 import { DepartmentService } from 'src/app/services/department-service/department.service';
 import { EmployeeService } from 'src/app/services/employee-service/employee.service';
@@ -14,7 +14,7 @@ import { EmployeeService } from 'src/app/services/employee-service/employee.serv
 })
 export class AddEmployeeComponent {
 
-  employeemodel: AddEmployeeRequest;
+  employeemodel: EmployeeRequest;
   departmentModel: DepartmentResponse;
   companyModel: CompanyResponse;
 
